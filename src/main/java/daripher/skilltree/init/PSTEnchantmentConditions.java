@@ -1,0 +1,39 @@
+package daripher.skilltree.init;
+
+import daripher.skilltree.SkillTreeMod;
+import daripher.skilltree.client.tooltip.TooltipHelper;
+import daripher.skilltree.skill.bonus.condition.enchantment.ArmorEnchantmentCondition;
+import daripher.skilltree.skill.bonus.condition.enchantment.EnchantmentCondition;
+import daripher.skilltree.skill.bonus.condition.enchantment.NoneEnchantmentCondition;
+import daripher.skilltree.skill.bonus.condition.enchantment.WeaponEnchantmentCondition;
+import java.util.List;
+import java.util.Objects;
+import net.minecraft.resources.ResourceLocation;
+import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.neoforge.registries.DeferredHolder;
+
+public class PSTEnchantmentConditions {
+  public static final ResourceLocation REGISTRY_ID =
+      ResourceLocation.fromNamespaceAndPath(SkillTreeMod.MOD_ID, "enchantment_conditions");
+  public static final DeferredRegister<EnchantmentCondition.Serializer> REGISTRY =
+      DeferredRegister.create(REGISTRY_ID, SkillTreeMod.MOD_ID);
+
+  public static final DeferredHolder<EnchantmentCondition.Serializer, EnchantmentCondition.Serializer> NONE =
+      REGISTRY.register("none", NoneEnchantmentCondition.Serializer::new);
+  public static final DeferredHolder<EnchantmentCondition.Serializer, EnchantmentCondition.Serializer> ARMOR =
+      REGISTRY.register("armor", ArmorEnchantmentCondition.Serializer::new);
+  public static final DeferredHolder<EnchantmentCondition.Serializer, EnchantmentCondition.Serializer> WEAPON =
+      REGISTRY.register("weapon", WeaponEnchantmentCondition.Serializer::new);
+
+  public static List<EnchantmentCondition> conditionsList() {
+    return PSTRegistries.ENCHANTMENT_CONDITIONS.get().stream()
+        .map(EnchantmentCondition.Serializer::createDefaultInstance)
+        .toList();
+  }
+
+  public static String getName(EnchantmentCondition condition) {
+    ResourceLocation id =
+        PSTRegistries.ENCHANTMENT_CONDITIONS.get().getKey(condition.getSerializer());
+    return TooltipHelper.idToName(Objects.requireNonNull(id).getPath());
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "required": true,
+  "minVersion": "0.8.5",
+  "compatibilityLevel": "JAVA_21",
+  "package": "daripher.skilltree.mixin",
+  "plugin": "daripher.skilltree.mixin.PSTMixinPlugin",
+  "mixins": [
+    "minecraft/EnchantmentMenuMixin",
+    "minecraft/PlayerMixin",
+    "minecraft/PotionItemMixin",
+    "minecraft/ThrownPotionMixin",
+    "minecraft/SmithingMenuMixin",
+    "minecraft/SimpleContainerMixin",
+    "minecraft/InventoryMenuMixin",
+    "minecraft/ItemStackMixin",
+    "minecraft/ItemMixin",
+    "minecraft/LivingEntityMixin",
+    "minecraft/AbstractArrowMixin",
+    "minecraft/FishingHookMixin",
+    "minecraft/AnvilMenuMixin",
+    "minecraft/AbstractContainerMenuMixin",
+    "minecraft/CraftingContainerMixin",
+    "minecraft/CraftingMenuMixin",
+    "minecraft/ResultSlotMixin",
+    "minecraft/ArmorSlotMixin",
+    "itemproduction/BlockEntityMixin",
+    "itemproduction/AbstractFurnaceBlockEntityMixin",
+    "itemproduction/BrewingStandBlockEntityMixin",
+    "itemproduction/CampfireBlockEntityMixin",
+    "itemproduction/CraftingMenuMixin",
+    "itemproduction/SmithingMenuProductionMixin",
+    "easymagic/ModEnchantmentMenuMixin",
+    "AbstractArrowAccessor",
+    "LivingEntityAccessor",
+    "CampfireBlockEntityAccessor",
+    "ShapedRecipeAccessor",
+    "ShapelessRecipeAccessor"
+  ],
+  "client": [
+    "minecraft/RecipeBookComponentMixin",
+    "EditBoxAccessor",
+    "RecipeCollectionAccessor"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

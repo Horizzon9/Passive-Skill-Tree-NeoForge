@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "healer_necklace",
+  "key": {
+    "#": {
+      "item": "minecraft:ghast_tear"
+    },
+    "n": {
+      "tag": "c:nuggets/gold"
+    }
+  },
+  "pattern": [
+    "nnn",
+    "n n",
+    "n#n"
+  ],
+  "result": {
+    "id": "skilltree:healer_necklace"
+  },
+  "show_notification": true
+}

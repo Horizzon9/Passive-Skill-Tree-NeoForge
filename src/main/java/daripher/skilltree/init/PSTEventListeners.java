@@ -1,0 +1,45 @@
+package daripher.skilltree.init;
+
+import daripher.skilltree.SkillTreeMod;
+import daripher.skilltree.client.tooltip.TooltipHelper;
+import daripher.skilltree.skill.bonus.event.*;
+import java.util.List;
+import java.util.Objects;
+import net.minecraft.resources.ResourceLocation;
+import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.neoforge.registries.DeferredHolder;
+
+public class PSTEventListeners {
+  public static final ResourceLocation REGISTRY_ID =
+      ResourceLocation.fromNamespaceAndPath(SkillTreeMod.MOD_ID, "event_listeners");
+  public static final DeferredRegister<SkillEventListener.Serializer> REGISTRY =
+      DeferredRegister.create(REGISTRY_ID, SkillTreeMod.MOD_ID);
+
+  public static final DeferredHolder<SkillEventListener.Serializer, SkillEventListener.Serializer> ATTACK =
+      REGISTRY.register("attack", AttackEventListener.Serializer::new);
+  public static final DeferredHolder<SkillEventListener.Serializer, SkillEventListener.Serializer> BLOCK =
+      REGISTRY.register("block", BlockEventListener.Serializer::new);
+  public static final DeferredHolder<SkillEventListener.Serializer, SkillEventListener.Serializer> EVASION =
+      REGISTRY.register("evasion", EvasionEventListener.Serializer::new);
+  public static final DeferredHolder<SkillEventListener.Serializer, SkillEventListener.Serializer> ITEM_USED =
+      REGISTRY.register("item_used", ItemUsedEventListener.Serializer::new);
+  public static final DeferredHolder<SkillEventListener.Serializer, SkillEventListener.Serializer> DAMAGE_TAKEN =
+      REGISTRY.register("damage_taken", DamageTakenEventListener.Serializer::new);
+  public static final DeferredHolder<SkillEventListener.Serializer, SkillEventListener.Serializer> ON_KILL =
+      REGISTRY.register("on_kill", KillEventListener.Serializer::new);
+  public static final DeferredHolder<SkillEventListener.Serializer, SkillEventListener.Serializer> SKILL_LEARNED =
+      REGISTRY.register("skill_learned", SkillLearnedEventListener.Serializer::new);
+  public static final DeferredHolder<SkillEventListener.Serializer, SkillEventListener.Serializer> SKILL_REMOVED =
+      REGISTRY.register("skill_removed", SkillRemovedEventListener.Serializer::new);
+
+  public static List<SkillEventListener> eventsList() {
+    return PSTRegistries.EVENT_LISTENERS.get().stream()
+        .map(SkillEventListener.Serializer::createDefaultInstance)
+        .toList();
+  }
+
+  public static String getName(SkillEventListener eventType) {
+    ResourceLocation id = PSTRegistries.EVENT_LISTENERS.get().getKey(eventType.getSerializer());
+    return TooltipHelper.idToName(Objects.requireNonNull(id).getPath());
+  }
+}

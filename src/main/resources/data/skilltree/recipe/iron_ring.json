@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "iron_ring",
+  "key": {
+    "#": {
+      "tag": "c:nuggets/iron"
+    }
+  },
+  "pattern": [
+    " # ",
+    "# #",
+    " # "
+  ],
+  "result": {
+    "id": "skilltree:iron_ring"
+  },
+  "show_notification": true
+}

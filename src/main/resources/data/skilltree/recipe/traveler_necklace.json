@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "traveler_necklace",
+  "key": {
+    "#": {
+      "item": "minecraft:feather"
+    },
+    "n": {
+      "tag": "c:nuggets/gold"
+    }
+  },
+  "pattern": [
+    "nnn",
+    "n n",
+    "n#n"
+  ],
+  "result": {
+    "id": "skilltree:traveler_necklace"
+  },
+  "show_notification": true
+}

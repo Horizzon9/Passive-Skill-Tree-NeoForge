@@ -1,0 +1,65 @@
+modLoader = "javafml"
+loaderVersion = "[4,)"
+license = "${mod_license}"
+issueTrackerURL = "https://github.com/Horizzon9/Passive-Skill-Tree-NeoForge/issues"
+
+[[mods]]
+modId = "${mod_id}"
+version = "${mod_version}"
+displayName = "${mod_name}"
+displayURL = "https://github.com/Horizzon9/Passive-Skill-Tree-NeoForge"
+authors = "${mod_authors}"
+credits = "Original mod by Daripher. Unofficial NeoForge 1.21.1 port. Socket tooltip renderer adapted from Apotheosis by Shadows_of_Fire. Item production hooks adapted from ItemProductionLib by Daripher."
+description = '''${mod_description}. Unofficial NeoForge 1.21.1 port of the original mod by Daripher.'''
+
+[[mixins]]
+config = "${mod_id}.mixins.json"
+
+[[dependencies.${mod_id}]]
+modId = "neoforge"
+type = "required"
+versionRange = "[21.1,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.${mod_id}]]
+modId = "minecraft"
+type = "required"
+versionRange = "[1.21.1]"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.${mod_id}]]
+modId = "curios"
+type = "required"
+versionRange = "[9.0,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.${mod_id}]]
+modId = "attributefix"
+type = "required"
+versionRange = "[21.1,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.${mod_id}]]
+modId = "apothic_attributes"
+type = "optional"
+versionRange = "[2.0,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.${mod_id}]]
+modId = "jei"
+type = "optional"
+versionRange = "[19.0,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.${mod_id}]]
+modId = "easymagic"
+type = "optional"
+versionRange = "[21.1,)"
+ordering = "NONE"
+side = "BOTH"
