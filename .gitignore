@@ -17,3 +17,4 @@ run_client.txt
 *.jar
 !gradle/wrapper/gradle-wrapper.jar
 src/generated/
+run_server_*.txt

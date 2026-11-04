@@ -21,7 +21,8 @@ public abstract class AnvilMenuMixin extends ItemCombinerMenu {
       at =
           @At(
               value = "INVOKE",
-              target = "Lnet/minecraft/world/item/enchantment/Enchantment;getMaxLevel()I"))
+              target = "Lnet/minecraft/world/item/enchantment/Enchantment;getMaxLevel()I"),
+      require = 0)
   private int uncapEnchantmentLevel(int original) {
     ItemStack base = inputSlots.getItem(0);
     if (base.getItem() == Items.ENCHANTED_BOOK) return original;
