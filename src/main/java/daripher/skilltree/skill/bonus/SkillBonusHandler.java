@@ -260,13 +260,22 @@ public class SkillBonusHandler {
 
   @SubscribeEvent
   public static void setCraftedItemBonus(ItemProducedEvent event) {
-    ItemStack stack = event.getStack();
-    if (PotionHelper.isMixture(stack)) return;
-    Player player = event.getPlayer();
+    applyCraftedItemBonuses(event.getStack(), event.getPlayer());
+  }
+
+  private static void applyCraftedItemBonuses(ItemStack stack, Player player) {
+    if (stack.isEmpty() || PotionHelper.isMixture(stack)) return;
     ItemHelper.removeItemBonuses(stack);
     getSkillBonuses(player, CraftedItemBonus.class).forEach(bonus -> bonus.itemCrafted(stack));
     ItemHelper.getItemBonuses(stack, ItemBonus.class).forEach(bonus -> bonus.itemCrafted(stack));
     ItemHelper.refreshDurabilityBonuses(stack);
+  }
+
+  @SubscribeEvent
+  public static void applyCraftedItemBonusesOnCrafting(PlayerEvent.ItemCraftedEvent event) {
+    Player player = event.getEntity();
+    if (player.level().isClientSide) return;
+    applyCraftedItemBonuses(event.getCrafting(), player);
   }
 
   @SubscribeEvent

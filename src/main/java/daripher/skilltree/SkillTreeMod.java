@@ -10,6 +10,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
+import net.neoforged.fml.loading.FMLEnvironment;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -59,6 +60,8 @@ public class SkillTreeMod {
   protected void addCompatibilities() {
     if (isModLoaded("apotheosis")) ApotheosisCompatibility.INSTANCE.register();
     if (isModLoaded("tetra")) TetraCompatibility.INSTANCE.register();
-    if (isModLoaded("apothic_attributes")) AttributesLibCompatibility.INSTANCE.register();
+    if (isModLoaded("apothic_attributes") && FMLEnvironment.dist.isClient()) {
+      AttributesLibCompatibility.INSTANCE.register();
+    }
   }
 }

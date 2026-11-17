@@ -9,6 +9,7 @@ import daripher.skilltree.item.ItemHelper;
 import daripher.skilltree.item.gem.GemItem;
 import daripher.skilltree.item.gem.bonus.GemBonusProvider;
 import daripher.skilltree.item.gem.bonus.RandomGemBonusProvider;
+import daripher.skilltree.recipe.RecipePlayerHolder;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerLevelAccess;
@@ -48,6 +49,16 @@ public abstract class SmithingMenuMixin extends ItemCombinerMenu {
     if (bonusProvider instanceof RandomGemBonusProvider) {
       ((PlayerExtension) player).updateGemsRandomSeed();
     }
+  }
+
+  @Inject(method = "createResult", at = @At("HEAD"))
+  private void setRecipePlayer(CallbackInfo callbackInfo) {
+    RecipePlayerHolder.set(player);
+  }
+
+  @Inject(method = "createResult", at = @At("RETURN"))
+  private void clearRecipePlayer(CallbackInfo callbackInfo) {
+    RecipePlayerHolder.clear();
   }
 
   @Inject(

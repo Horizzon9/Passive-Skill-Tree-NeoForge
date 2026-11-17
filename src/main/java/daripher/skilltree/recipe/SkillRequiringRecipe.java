@@ -9,12 +9,15 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
+import net.neoforged.neoforge.common.CommonHooks;
 
 public interface SkillRequiringRecipe {
   Map<Recipe<?>, ResourceLocation> RECIPE_IDS = new WeakHashMap<>();
 
   default boolean isUncraftable(Recipe<?> recipe) {
-    return isUncraftable(RecipePlayerHolder.get(), recipe);
+    Player player = RecipePlayerHolder.get();
+    if (player == null) player = CommonHooks.getCraftingPlayer();
+    return isUncraftable(player, recipe);
   }
 
   default boolean isUncraftable(@Nullable Player player, Recipe<?> recipe) {

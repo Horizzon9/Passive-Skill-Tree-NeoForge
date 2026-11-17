@@ -49,8 +49,6 @@ public class SkillTreeScreen extends Screen {
   private String search = "";
   public float renderAnimation;
   public int skillPoints;
-  protected double scrollSpeedX;
-  protected double scrollSpeedY;
   protected double scrollX;
   protected double scrollY;
   protected int maxScrollX;
@@ -95,10 +93,6 @@ public class SkillTreeScreen extends Screen {
     statsInfo = new ScrollableComponentList(48, height - 60);
     statsInfo.setComponents(getMergedSkillBonusesTooltips());
     addRenderableWidget(statsInfo);
-    maxScrollX -= width / 2 - 80;
-    maxScrollY -= height / 2 - 80;
-    if (maxScrollX < 0) maxScrollX = 0;
-    if (maxScrollY < 0) maxScrollY = 0;
     addSkillConnections();
     highlightSkillsThatCanBeLearned();
     updateSearch();
@@ -507,12 +501,14 @@ public class SkillTreeScreen extends Screen {
 
   private void updateScreen(float partialTick) {
     updateBuyPointButton();
-    scrollX += scrollSpeedX * partialTick;
-    scrollX = Math.max(-maxScrollX * zoom, Math.min(maxScrollX * zoom, scrollX));
-    scrollSpeedX *= 0.8;
-    scrollY += scrollSpeedY * partialTick;
-    scrollY = Math.max(-maxScrollY * zoom, Math.min(maxScrollY * zoom, scrollY));
-    scrollSpeedY *= 0.8;
+    clampScroll();
+  }
+
+  private void clampScroll() {
+    double limitX = maxScrollX * zoom;
+    double limitY = maxScrollY * zoom;
+    scrollX = Math.max(-limitX, Math.min(limitX, scrollX));
+    scrollY = Math.max(-limitY, Math.min(limitY, scrollY));
   }
 
   protected void updateBuyPointButton() {
@@ -548,8 +544,9 @@ public class SkillTreeScreen extends Screen {
   public boolean mouseDragged(
       double mouseX, double mouseY, int mouseButton, double dragAmountX, double dragAmountY) {
     if (mouseButton != 0 && mouseButton != 2) return false;
-    if (maxScrollX > 0) scrollSpeedX += dragAmountX * 0.25;
-    if (maxScrollY > 0) scrollSpeedY += dragAmountY * 0.25;
+    scrollX += dragAmountX;
+    scrollY += dragAmountY;
+    clampScroll();
     return true;
   }
 

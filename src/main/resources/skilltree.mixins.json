@@ -27,7 +27,6 @@
     "itemproduction/AbstractFurnaceBlockEntityMixin",
     "itemproduction/BrewingStandBlockEntityMixin",
     "itemproduction/CampfireBlockEntityMixin",
-    "itemproduction/CraftingMenuMixin",
     "itemproduction/SmithingMenuProductionMixin",
     "easymagic/ModEnchantmentMenuMixin",
     "AbstractArrowAccessor",
